@@ -1,6 +1,8 @@
 var arr = new Array();
 
+//add new data
 function addData(){
+
     arr.push({
         name: document.getElementById("Name").value,
         subject: document.getElementById("Subject").value
@@ -10,49 +12,58 @@ function addData(){
     showData();
 }
 
+//delete data from local storage
 function deleteData(){
     localStorage.clear();
     showData();
 }
 
+//show data
 function showData(){
 
     var str = localStorage.getItem('localData');
 
+    //verification array
     if( str != null){
         arr =JSON.parse(str);
     }
 
     var tbl =  document.getElementById('show');
     var x = tbl.rows.length;
+
+    //delete duplicated rows
     while(--x){
         tbl.deleteRow(x);
     }
 
+    // boucle for show data 
     for(var i=0 ; i < arr.length ; i++){
 
         var NewRow = tbl.insertRow();
         var cel1 = NewRow.insertCell();
         var cel2 = NewRow.insertCell();
-        var cel3 = NewRow.insertCell();
-        var input = document.createElement("input");
-        input.type = "text";
-        var inputdate = cel3.input;
+
+        //add data to cell
         cel1.innerHTML= arr[i].name;
         cel2.innerHTML= arr[i].subject;
-        input.innerHTML= arr[i].subject;
 
     }
 }
 
 
+//new array for random rst
 var newArr = new Array();
+
+//random funtion
 function random(){
+    var newstr = localStorage.getItem('rstData');
     var str = localStorage.getItem('localData');
     arr =JSON.parse(str);
 
     if(arr.length == 0){
         console.log('No More Random Numbers');
+        // var message = document.getElementById('message');
+        message.innerHTML = "Ajouter un apprenant";
         return;
     }
     
@@ -64,10 +75,13 @@ function random(){
     //tirage
     var randomIndex = result;
     var randomNumber = arr[randomIndex];
-    var supp= arr.splice(randomIndex,1);
-    // console.log(supp)
-    // console.log(randomNumber.name);
+    // localStorage.removeItem(randomIndex);
+    var newStorage= JSON.stringify(arr.filter((elem,i)=>i !== randomIndex))
 
+    var str = localStorage.setItem('localData',newStorage);
+
+    showData()
+    //push resultat to new array
     newArr.push({
         name: randomNumber.name,
         subject: randomNumber.subject
@@ -75,10 +89,8 @@ function random(){
 
     localStorage.setItem("rstData", JSON.stringify(newArr));
 
-
-    
-    console.log(newArr);
     resultat();
+
 
 }
 
@@ -90,18 +102,22 @@ function resultat(){
 
     var tbl =  document.getElementById('rst');
     var x = tbl.rows.length;
+
     while(--x){
         tbl.deleteRow(x);
     }
+
     for(var i=0 ; i < newArr.length ; i++){
 
         var NewRow = tbl.insertRow();
         var cel1 = NewRow.insertCell();
         var cel2 = NewRow.insertCell();
         var cel2 = NewRow.insertCell();
-
+        // var cel3 = NewRow.insertCell();
+        
         cel1.innerHTML= newArr[i].name;
         cel2.innerHTML= newArr[i].subject;
+        // cel3.innerHTML = "<input type='date' id='date' class='deleteBtn'/>"
 
     }
 }

@@ -18,7 +18,7 @@
 				<p class="text-center">
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quae tempora quidem fuga delectus voluptatem saepe voluptatibus.
 				</p>
-				<a href="#start" class="btn btn-md text-center">COMMENCER</a>
+				<a href="#start" class="btn btn-md ">COMMENCER</a>
 			</div>
 		</div>
 
@@ -26,12 +26,15 @@
     <div id="start" class="container-fluid banner">
         <div class="container">
             <h4>Ajouter un apprenant</h4>
-            <form action="">
+            <p class="text-center text-danger" id="message">
+            </p>
+            <!-- <form action=""> -->
                 <input type="text" id="Name" placeholder="Name" />
                 <input type="text" id="Subject" placeholder="Subject" />
                 <input type="submit" onclick="addData()" value="Submit">
-                <input type="submit" class="btn btn-warning" onclick="deleteData()" value="clear">
-            </form>
+                <!-- <input type="submit" class="btn btn-warning" onclick="deleteData()" value="clear"> -->
+                <a href="/" onclick="deleteData()"  class="btn btn-warning">Clear</a>
+            <!-- </form> -->
         </div>
         
         <div class="container-table">
@@ -57,22 +60,26 @@
                 <tr>
                     <th>name</th>
                     <th>subject</th>
-                    <th>date</th>
                 </tr>
             </thead>
                 <script>
-                    // resultat();
+                    resultat();
                 </script>
                 
             </div>
         </div>
+        
+    </div>
+    <div class="col-md-8 offset-md-2 container">
+        <button class="btn btn-success" onclick="random()">random</button>
+    </div>
 
-    </div>
-    <div class="container-fluid ">
-        <div class="container">
-            <button class="btn btn-success" onclick="random()">random</button>
+    <!-- <div class="container-fluid  ">
+        
+        <div class="container animation-background">
+            <h2>$</h2>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- <script>
