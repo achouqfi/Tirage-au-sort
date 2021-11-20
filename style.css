@@ -1,0 +1,109 @@
+body{
+	margin:0;
+	padding:0;
+	background:#fff;
+	font-family: 'Raleway',sans-serif;
+	color: #fff;
+}
+
+.banner{
+	height: 100vh;
+	width: 100%;
+	background-position: top;
+	background-size:cover;
+	background-repeat: no-repeat;
+}
+
+.banner .info{
+	margin-top:20%;
+	transform: translateY(-15%);
+}
+.banner .info h1{
+	font-size: 2.5em;
+	font-weight: 700;
+    color: #040000;
+	letter-spacing: 2px;
+}
+.banner .info p{
+	font-size: 1.5em;
+	font-weight: 500;
+	color: rgb(0, 0, 0);
+	letter-spacing: 2px;
+}
+.banner .info a{
+	margin-left:50%;
+	transform: translateX(-50%);
+	color: #fff;
+	background: #e91d43;
+	padding:10px 20px; 
+	font-size: 1em;
+	font-weight: 600;
+}
+.banner .info a:hover{
+	background: #e91e63;
+}
+
+/* form design */
+
+form{
+    width:90%;
+    border-top:1px dotted #D9D9D9;
+    margin:10px auto
+}
+input[type="button"]{
+    width: 35px;
+}
+button{
+    width:246px;
+    height:40px;
+    color:#4C4C4C;
+    margin-bottom:20px;
+    margin-left:20px
+}
+input{
+    width:250px;
+    padding:5px;
+    margin:10px 0 10px;
+    border-radius:5px;
+    border:2px solid #cacaca
+}
+input[type = submit]{
+    width:100px;
+    background-color:#e91d43;
+    border-radius:5px;
+    border:2px solid #e91d43;
+    color:#fff
+}
+h4{
+    color:#4C4C4C;
+    text-align:center
+}
+.container{
+    text-align: center;
+    width: 80%;
+    border: 1px solid #D0D0D0;
+    background-color: #fff;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+/* table */
+
+.custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+}
+
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+}
+
+.row-table{
+    margin-left: 12.5%;
+}

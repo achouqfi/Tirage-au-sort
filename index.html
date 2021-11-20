@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="./main.js"></script>
+</head>
+<body>
+    <div class="container-fluid banner">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 info">
+				<h1 class="text-center">TIRAGE AU SORT</h1>
+				<p class="text-center">
+					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quae tempora quidem fuga delectus voluptatem saepe voluptatibus.
+				</p>
+				<a href="#start" class="btn btn-md text-center">COMMENCER</a>
+			</div>
+		</div>
+
+	</div>
+    <div id="start" class="container-fluid banner">
+        <div class="container">
+            <h4>Ajouter un apprenant</h4>
+            <form action="">
+                <input type="text" id="Name" placeholder="Name" />
+                <input type="text" id="Subject" placeholder="Subject" />
+                <input type="submit" onclick="addData()" value="Submit">
+                <input type="submit" class="btn btn-warning" onclick="deleteData()" value="clear">
+            </form>
+        </div>
+        
+        <div class="container-table">
+            <div class="row-table row col-md-9 col-md-offset-2 custyle ">
+            <table class="table table-striped custab" id="show">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>subject</th>
+                </tr>
+            </thead>
+                <script>
+                    showData();
+                </script>
+                
+            </div>
+        </div>
+
+        <div class="container-table">
+            <div class="row-table row col-md-9 col-md-offset-2 custyle ">
+            <table class="table table-striped custab" id="rst">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>subject</th>
+                    <th>date</th>
+                </tr>
+            </thead>
+                <script>
+                    // resultat();
+                </script>
+                
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid ">
+        <div class="container">
+            <button class="btn btn-success" onclick="random()">random</button>
+        </div>
+    </div>
+
+
+    <!-- <script>
+
+        var list1 = [];
+		var list2 = [];
+
+		var n = 1;
+		var x = 0;
+
+		function AddRow(){
+
+            var name = document.getElementById("Name").value;
+            var subject = document.getElementById("Subject").value;
+			var AddRown =  document.getElementById('show');
+			var NewRow = AddRown.insertRow(n);
+
+			list1[x] = name;
+			list2[x] = subject;
+            
+            
+            
+			var cel1 = NewRow.insertCell(0);
+			var cel2 = NewRow.insertCell(1);
+
+			cel1.innerHTML = list1[x];
+			cel2.innerHTML = list2[x];
+
+			n++;
+			x++;
+
+		}
+    </script> -->
+    
+</body>
+</html>
