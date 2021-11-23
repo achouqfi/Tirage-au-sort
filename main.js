@@ -1,13 +1,16 @@
+//create array to save data
 var arr = new Array();
 
 //add new data
 function addData(){
-
+    
+    //push data to array
     arr.push({
         name: document.getElementById("Name").value,
-        subject: document.getElementById("Subject").value
+        subject: document.getElementById("Subject").value,
     });
 
+    //save data in localstorage
     localStorage.setItem("localData", JSON.stringify(arr));
     showData();
 }
@@ -22,10 +25,16 @@ function deleteData(){
 function showData(){
 
     var str = localStorage.getItem('localData');
+    var studentList = document.getElementById('table');
 
     //verification array
     if( str != null){
         arr =JSON.parse(str);
+        if( arr.length !== 0){
+            studentList.style.display="block";
+        }else{
+            studentList.style.display="none";
+        }
     }
 
     var tbl =  document.getElementById('show');
@@ -38,15 +47,9 @@ function showData(){
 
     // boucle for show data 
     for(var i=0 ; i < arr.length ; i++){
-
         var NewRow = tbl.insertRow();
-        var cel1 = NewRow.insertCell();
-        var cel2 = NewRow.insertCell();
-
-        //add data to cell
-        cel1.innerHTML= arr[i].name;
-        cel2.innerHTML= arr[i].subject;
-
+        var cel = NewRow.insertCell();
+        cel.innerHTML= arr[i].name;
     }
 }
 
@@ -56,17 +59,15 @@ var newArr = new Array();
 
 //random funtion
 function random(){
-    var newstr = localStorage.getItem('rstData');
     var str = localStorage.getItem('localData');
     arr =JSON.parse(str);
 
     if(arr.length == 0){
         console.log('No More Random Numbers');
-        // var message = document.getElementById('message');
         message.innerHTML = "Ajouter un apprenant";
         return;
     }
-    
+
     //step1 = max - min + 1;
     var step1 = arr.length ;  // -1 - 0 + 1
     var step2 = Math.random() * step1;
@@ -75,49 +76,58 @@ function random(){
     //tirage
     var randomIndex = result;
     var randomNumber = arr[randomIndex];
-    // localStorage.removeItem(randomIndex);
     var newStorage= JSON.stringify(arr.filter((elem,i)=>i !== randomIndex))
-
     var str = localStorage.setItem('localData',newStorage);
 
-    showData()
+    showData();
+
     //push resultat to new array
     newArr.push({
         name: randomNumber.name,
-        subject: randomNumber.subject
+        subject: randomNumber.subject,
+        date: document.getElementById('startDate').value
     });
 
     localStorage.setItem("rstData", JSON.stringify(newArr));
 
     resultat();
-
-
 }
 
+//random result function 
 function resultat(){
     var newstr = localStorage.getItem('rstData');
+    var resultatList = document.getElementById('resultat-table');
+
     if( newstr != null){
         newArr =JSON.parse(newstr);
+        if( newArr.length !== 0){
+            resultatList.style.display="block";
+        }
     }
 
-    var tbl =  document.getElementById('rst');
-    var x = tbl.rows.length;
+    var resultat =  document.getElementById('rst');
+    var x = resultat.rows.length;
 
     while(--x){
-        tbl.deleteRow(x);
+        resultat.deleteRow(x);
     }
-
+    
+    let date = new Date();
+    // console.log(date);
     for(var i=0 ; i < newArr.length ; i++){
-
-        var NewRow = tbl.insertRow();
+        if(date.getDay()+1 ===  6) date.setDate(date.getDate() + 3);
+        else date.setDate(date.getDate() + 1);
+        // console.log();
+        var NewRow = resultat.insertRow();
         var cel1 = NewRow.insertCell();
-        var cel2 = NewRow.insertCell();
-        var cel2 = NewRow.insertCell();
-        // var cel3 = NewRow.insertCell();
-        
-        cel1.innerHTML= newArr[i].name;
-        cel2.innerHTML= newArr[i].subject;
-        // cel3.innerHTML = "<input type='date' id='date' class='deleteBtn'/>"
-
+        cel1.innerHTML= `Mr ${newArr[i].name} le ${date.toLocaleDateString()} , votre sujet est ${newArr[i].subject}`;
     }
+}
+
+function Export(type, fn, dl) {
+    var elt = document.getElementById('rst');
+    var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+    return dl ?
+        XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+        XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
 }

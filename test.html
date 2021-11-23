@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- tailwind links -->
+  <link href="/path/to/tailwind.css" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <!-- exportation to excel -->
+  <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+  <!-- js file -->
+  <script src="./main.js"></script>
+  <!-- css file -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="box-content p-4 bg-white">
+  <div class="grid grid-cols-3 gap-4">
+    <div class="w-full max-w-lg">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h2 class="message" id='message' ></h2>
+        <div class="mb-4">
+          <input class="shadow appearance-none border rounded w-full ml-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden" id="startDate" type="date" placeholder="name">
+        </div>
+        <div class="flex">
+          <div class="mb-4">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Name" type="text" placeholder="name">
+          </div>
+          <div class="mb-6">
+            <input class="shadow appearance-none border rounded w-full py-2 ml-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="Subject" type="text" placeholder="subject">
+          </div>
+        </div>
+        <div class="flex items-center center">
+          <div class="">
+            <button class="bg-green-400 hover:bg-green-700 text-white border focus:shadow-outline font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" onclick="addData()" type="button">
+              ADD
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4  hidden" id="table">
+        <div>
+          <div class="border-4 w-full border rounded p-3 border-black-500 border-opacity-100" >
+            <table class="table-auto" id="show">
+              <thead>
+                <tr class="flex items-center header-table">
+                </tr>
+              </thead>
+              <tbody>
+                  <script>
+                    showData();
+                  </script>
+              </tbody>
+         
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center ">
+      <div class="outer circle">
+        <button  onclick="random()">Random</button>
+        <span></span>
+      </div>
+    </div>
+    <div class="bg-white shadow-md  rounded px-8 pt-6 pb-8 mb-4 hidden" id="resultat-table" >
+      <div class="border-4 w-full border rounded  p-3 border-black-500 border-opacity-100">
+        <table class="table-auto" id="rst">
+          <thead>
+            <tr class="flex items-center header-table ">
+            </tr>
+          </thead>
+           <tbody> 
+              <script>
+                resultat();
+              </script>
+           </tbody> 
+        </table>
+      </div>
+      <div class="flex items-center center mt-5">
+        <button onclick="Export('xlsx')" class="bg-green-500 hover:bg-green-200 text-white border focus:shadow-outline font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline">Export</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
