@@ -59,9 +59,11 @@ var newArr = new Array();
 
 //random funtion
 function random(){
+    //get data from local storage
     var str = localStorage.getItem('localData');
     arr =JSON.parse(str);
 
+    //error message in length array is null
     if(arr.length == 0){
         console.log('No More Random Numbers');
         message.innerHTML = "Ajouter un apprenant";
@@ -70,8 +72,8 @@ function random(){
 
     //step1 = max - min + 1;
     var step1 = arr.length ;  // -1 - 0 + 1
-    var step2 = Math.random() * step1;
-    var result = Math.floor(step2) + 0;
+    var step2 = Math.random() * step1; 
+    var result = Math.floor(step2) + 0; 
     
     //tirage
     var randomIndex = result;
@@ -85,11 +87,10 @@ function random(){
     newArr.push({
         name: randomNumber.name,
         subject: randomNumber.subject,
-        date: document.getElementById('startDate').value
     });
 
+    //stock result in localStorage
     localStorage.setItem("rstData", JSON.stringify(newArr));
-
     resultat();
 }
 
@@ -98,6 +99,7 @@ function resultat(){
     var newstr = localStorage.getItem('rstData');
     var resultatList = document.getElementById('resultat-table');
 
+    //verification if array in not null
     if( newstr != null){
         newArr =JSON.parse(newstr);
         if( newArr.length !== 0){
@@ -107,27 +109,28 @@ function resultat(){
 
     var resultat =  document.getElementById('rst');
     var x = resultat.rows.length;
-
+    //delete day dupplicate
     while(--x){
         resultat.deleteRow(x);
     }
     
     var date = new Date();
-    // console.log(date);
     for(var i=0 ; i < newArr.length ; i++){
+        //day auto incriment
         if(date.getDay()+1 ===  6) date.setDate(date.getDate() + 3);
         else date.setDate(date.getDate() + 1);
-        // console.log();
+
         var NewRow = resultat.insertRow();
         var cel1 = NewRow.insertCell();
         cel1.innerHTML= `Mr ${newArr[i].name} le ${date.toLocaleDateString()} , votre sujet est ${newArr[i].subject}`;
     }
 }
 
+//exportation function
 function Export(type, fn, dl) {
     var elt = document.getElementById('rst');
     var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
     return dl ?
         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
-        XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+        XLSX.writeFile(wb, fn || ('resultat de tirage.' + (type || 'xlsx')));
 }
