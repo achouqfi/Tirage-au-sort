@@ -112,7 +112,7 @@ function resultat(){
         resultat.deleteRow(x);
     }
     
-    let date = new Date();
+    var date = new Date();
     // console.log(date);
     for(var i=0 ; i < newArr.length ; i++){
         if(date.getDay()+1 ===  6) date.setDate(date.getDate() + 3);
